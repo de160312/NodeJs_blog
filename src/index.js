@@ -5,24 +5,27 @@ const {engine} = require('express-handlebars')
 const morgan = require('morgan')
 const app = express()
 const port = 3000
+const route = require('./routes')
 
 app.use(express.static(path.join(__dirname,'public')))//set file tinh~
 
+app.use(express.urlencoded({
+  extended: true
+})) //middlewarew
+app.use(express.json()) // gửi code js lên
+
 //HTTP logger
-app.use(morgan('combined'))
+// app.use(morgan('combined'))
 
 //template engine
 app.engine('.hbs', engine({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname,'resources/views'));
 
-app.get('/', (req, res) => { // có thể thay đổi '/' để định nghĩa url
-  res.render('home');
-})
+//Route init
+route(app);
+//Action ---> Dispatcher ---> Funtion handler (Controller)
 
-app.get('/news', (req, res) => { // có thể thay đổi '/' để định nghĩa url
-  res.render('news');
-})
 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`)
