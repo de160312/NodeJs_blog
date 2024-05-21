@@ -1,9 +1,11 @@
 const newsRouter = require('./news');
 const siteRouter = require('./site');
+const coursesRouter = require('./courses');
 
 function route(app) {
     app.use('/news', newsRouter);
-    app.use('/', siteRouter);
+    app.use('/courses', coursesRouter);
+    app.use('/',siteRouter)
 
     // app.get('/', (req, res) => { // có thể thay đổi '/' để định nghĩa url và được gọi là Routes
     //     res.render('home');
