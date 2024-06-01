@@ -3,6 +3,7 @@ const express = require('express');
 const { engine } = require('express-handlebars');
 // import { engine } from 'express-handlebars';
 const morgan = require('morgan');
+const methodOverride = require('method-override');
 const app = express();
 const port = 3000;
 const route = require('./routes');
@@ -20,11 +21,21 @@ app.use(
 ); //middlewarew
 app.use(express.json()); // gửi code js lên
 
+app.use(methodOverride('_method'));
+
 //HTTP logger
 // app.use(morgan('combined'))
 
 //template engine
-app.engine('.hbs', engine({ extname: '.hbs' }));
+app.engine(
+    '.hbs',
+    engine({
+        extname: '.hbs',
+        helpers: {
+            sum: (a, b) => a + b,
+        },
+    }),
+);
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
 

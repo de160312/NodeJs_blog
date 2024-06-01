@@ -9,7 +9,8 @@ class SiteController {
         //     res.status(400).json({ error: 'Error!' });
         // }
 
-        Course.find({}).lean()
+        Course.find({})
+            .lean()
             .then((courses) => res.render('home', { courses }))
             .catch(next);
     }

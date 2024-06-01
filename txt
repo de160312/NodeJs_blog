@@ -1,0 +1,42 @@
+get: gửi dữ liệu lên sever và yêu cầu sever gửi lại dữ liệu cho client
+post: gửi dữ liệu lên sever và yêu cầu sever tạo mới một dữ liệu (lưu lại)
+put: thường dùng để chỉnh sửa dữ liệu, put sẽ replace 1 document
+patch: thường dùng để chỉnh sửa dữ liệu, patch sẽ sửa từng filed
+
+Coppy ca 1 chu: option + shift + mui ten
+
+Query parameter sẽ là .params, còn form data sẽ là .body
+
+- flow của chức năng xoá:
+    + đi vào index.js trong folder routes -> match với phương thức delete 
+    + nhảy vào CourseController -> destroy -> chọc vào db qua model Course -> xoá thằng course dc truyền qua id bằng params
+    + -> sau khi xoá xong sẽ redirect back
+
+create -> post
+update -> put, patch
+delete -> delete
+read -> get
+
+Phương thức luôn luôn có dấu ngoặc tròn
+
+Mục đích của middleware:
++ Dựng chức năng xác thực(validation)
++ Chức năng phân quyền(authorization)
++ Để chia sẻ các giá trị của biến tới tất cả các views(BE)
+
+- req.params dùng để truy cập các giá trị từ các tham số động trong đường dẫn URL.
+- req.query dùng để truy cập các giá trị từ các tham số truy vấn trong URL.
+- req.body dùng để truy cập các giá trị từ dữ liệu gửi trong phần thân của yêu cầu HTTP.
+
++ tạo routes có tên /courses/.. thì tạo routes có tên coursesJs
++ sau đó tạo file Js Controller cho nó (CoursController)
++ vào indexJs để import route của coursesJs
++ khi trình duyệt nhảy vào path có tên là /courses/.. thì nó sẽ nhảy vào indexJs trong route và match 
+với thằng /courses và nhảy vào coursesRouter
++ nhảy vào coursesJs xong thấy thằng :slug thì nó sẽ nhảy vào controller của course và 
+tìm đến phương thức tương ứng
++ sau khi nhảy vào controller thì nó sẽ tìm đến phương thức tương ứng để xử lí 
+và sẽ dc export ra file html tương ứng
+
+read:
+    + .find({})
